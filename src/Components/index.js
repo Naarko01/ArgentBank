@@ -1,5 +1,5 @@
-import Features from "./Features"
+import FeatureItem from "./FeatureItem"
 import Header from "./Header"
 import Footer from "./Footer"
 
-export { Features, Header, Footer };
+export { FeatureItem, Header, Footer };
