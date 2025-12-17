@@ -2,23 +2,40 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const BASE_URL = "http://localhost:3001/api/v1"
 
+function getToken() {
+   return sessionStorage.getItem('token');
+}
+
 export const fetchUserInfo = createAsyncThunk(
    'user/fetch',
    async (_, { rejectWithValue }) => {
       try {
-         const token = sessionStorage.getItem('token');
-
+         const token = getToken();
          const res = await fetch(`${BASE_URL}/user/profile`, {
             headers: { 'Authorization': `Bearer ${token}` }
          });
 
-         if (!res.ok) throw new Error('Unable to fetch user info');
-
          const data = await res.json()
-         return data.body;
+
+         if (!res.ok) {
+            return rejectWithValue({
+               status: res.status,
+               message: data?.message
+            })
+         };
+
+         const usedData = {
+            email: data.body.email,
+            firstName: data.body.firstName,
+            lastName: data.body.lastName,
+            userName: data.body.userName,
+            id: data.body.id,
+         }
+
+         return usedData;
 
       } catch (err) {
-         return rejectWithValue(err.message);
+         return rejectWithValue({ message: err.message });
       }
    }
 );
@@ -27,8 +44,7 @@ export const updateUserInfo = createAsyncThunk(
    'user/update',
    async (updateData, { rejectWithValue }) => {
       try {
-         const token = sessionStorage.getItem('token');
-
+         const token = getToken();
          const res = await fetch(`${BASE_URL}/user/profile`, {
             method: 'PUT',
             headers: {
@@ -38,11 +54,27 @@ export const updateUserInfo = createAsyncThunk(
             body: JSON.stringify(updateData)
          });
 
-         if (!res.ok) throw new Error('Failed to update user');
+         const data = await res.json();
 
-         return await res.json();
+         if (!res.ok) {
+            return rejectWithValue({
+               status: res.status,
+               message: data?.message
+            })
+         };
+
+         const usedData = {
+            email: data.body.email,
+            firstName: data.body.firstName,
+            lastName: data.body.lastName,
+            userName: data.body.userName,
+            id: data.body.id,
+         }
+
+         return usedData;
+
       } catch (err) {
-         return rejectWithValue(err.message);
+         return rejectWithValue({ message: err.message });
       }
    }
 );

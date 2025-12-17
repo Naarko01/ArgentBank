@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default function Header() {
+	const { isAuthenticated, logoutUser, user } = useAuth();
+
 	return (
 		<nav className="main-nav">
 			<Link to="/" className="main-nav-logo">
@@ -12,10 +15,18 @@ export default function Header() {
 				<h1 className="sr-only">Argent Bank</h1>
 			</Link>
 			<div>
-				<Link to="/login" className="main-nav-item">
-					<i className="fa fa-user-circle"></i>
-					Sign In
-				</Link>
+				{!isAuthenticated ? (
+					<Link to="/login" className="main-nav-item">
+						<i className="fa fa-user-circle"></i>
+						Sign In
+					</Link>
+				) : (
+					<a onClick={logoutUser} className="main-nav-item">
+						{user?.userName}
+						<i className="fa fa-user-circle"></i>
+						Logout
+					</a>
+				)}
 			</div>
 		</nav>
 	);

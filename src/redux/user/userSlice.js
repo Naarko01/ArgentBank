@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchUserInfo, updateUserInfo } from './userThunks';
 
+
 const userSlice = createSlice({
    name: 'user',
    initialState: {

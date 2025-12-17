@@ -11,18 +11,22 @@ export const login = createAsyncThunk(
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
          });
-         if (!res.ok) {
-            const error = await res.json();
-            throw new Error(error.message);
-         };
 
          const data = await res.json();
+
+         if (!res.ok) {
+            return rejectWithValue({
+               status: res.status,
+               message: data?.message,
+            })
+         };
+
          sessionStorage.setItem('token', data.body.token);
 
          return true;
 
       } catch (err) {
-         return rejectWithValue(err.message);
+         return rejectWithValue({ message: err.message });
       }
    }
 );

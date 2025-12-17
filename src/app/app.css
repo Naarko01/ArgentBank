@@ -8,6 +8,9 @@ html {
 
 body {
    margin: 0;
+}
+
+#root {
    display: flex;
    flex-direction: column;
    min-height: 100vh;
@@ -57,6 +60,7 @@ body {
 .main-nav-item {
    text-decoration: none;
    margin-right: 0.5rem;
+   cursor: pointer;
 }
 
 .main-nav-item:hover {
