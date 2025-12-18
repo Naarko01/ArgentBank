@@ -18,7 +18,7 @@ export default function Header() {
 				{!isAuthenticated ? (
 					<Link to="/login" className="main-nav-item">
 						<i className="fa fa-user-circle"></i>
-						Sign In
+						Login
 					</Link>
 				) : (
 					<div className="nav-user-wrapper">

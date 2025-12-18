@@ -28,7 +28,7 @@ export default function Login() {
 		<main className="main bg-dark">
 			<section className="sign-in-content">
 				<i className="fa fa-user-circle sign-in-icon"></i>
-				<h1>Sign In</h1>
+				<h1>Login</h1>
 				<form onSubmit={handleSubmit}>
 					<div className="input-wrapper">
 						<label htmlFor="username">Username</label>
@@ -53,7 +53,7 @@ export default function Login() {
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
 					{error ? <p className="form-error">{error}</p> : null}
-					<button className="sign-in-button">Sign In</button>
+					<button className="sign-in-button">Login</button>
 				</form>
 			</section>
 		</main>
