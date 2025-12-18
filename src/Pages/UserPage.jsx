@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import AccountItem from "../Components/AccountItem";
 
 export default function UserPage() {
 	const { user, isAuthenticated, editUser } = useAuth();
@@ -11,11 +12,30 @@ export default function UserPage() {
 	const [feedback, setFeedback] = useState(null);
 	const navigate = useNavigate();
 
+	//elements will be fetch from API when accounts and transactions routes will be ready
+	const accountParam = [
+		{
+			accTitle: "Argent Bank Checking (x8349)",
+			accAmount: "$2,082.79",
+			accDescription: "Available Balance",
+		},
+		{
+			accTitle: "Argent Bank Savings (x6712)",
+			accAmount: "$10,928.42",
+			accDescription: "Available Balance",
+		},
+		{
+			accTitle: "Argent Bank Credit Card (x8349)",
+			accAmount: "$184.30",
+			accDescription: "Current Balance",
+		},
+	];
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const success = await editUser(userName);
 		if (success) {
-			setFeedback("Changement validé");
+			setFeedback("Changement validé !");
 		} else {
 			setFeedback(user.error);
 		}
@@ -33,8 +53,8 @@ export default function UserPage() {
 	}, [isAuthenticated, navigate]);
 
 	const editForm = (
-		<form onSubmit={handleSubmit}>
-			<div className="input-wrapper">
+		<form onSubmit={handleSubmit} className="user-update-form">
+			<div className="input-wrapper user-update">
 				<label htmlFor="userName">User Name</label>
 				<input
 					type="text"
@@ -43,21 +63,37 @@ export default function UserPage() {
 					onChange={(e) => setUserName(e.target.value)}
 				/>
 			</div>
-			<div className="input-wrapper">
+			<div className="input-wrapper user-update">
 				<label htmlFor="firstName">First Name</label>
 				<input type="text" name="firstName" value={firstName} readOnly />
 			</div>
-			<div className="input-wrapper">
+			<div className="input-wrapper user-update">
 				<label htmlFor="lastName">Last Name</label>
 				<input type="text" name="lastName" value={lastName} readOnly />
 			</div>
-			{feedback ? <p>{feedback}</p> : null}
-			<button onClick={handleSubmit}>Save</button>
-			<button onClick={resetState}>Retour</button>
+			{feedback ? (
+				<p
+					className={
+						feedback === "Changement validé !"
+							? "form-feedback-validate"
+							: "form-feedback-error"
+					}
+				>
+					{feedback}
+				</p>
+			) : null}
+			<div className="btn-wrapper">
+				<button onClick={handleSubmit} className="user-update-btn">
+					Save
+				</button>
+				<button onClick={resetState} className="user-update-btn">
+					Retour
+				</button>
+			</div>
 		</form>
 	);
 
-	const content = (
+	const mainContent = (
 		<main className="main bg-dark">
 			<div className="header">
 				<h1>
@@ -76,39 +112,15 @@ export default function UserPage() {
 				)}
 			</div>
 			<h2 className="sr-only">Accounts</h2>
-			<section className="account">
-				<div className="account-content-wrapper">
-					<h3 className="account-title">Argent Bank Checking (x8349)</h3>
-					<p className="account-amount">$2,082.79</p>
-					<p className="account-amount-description">Available Balance</p>
-				</div>
-				<div className="account-content-wrapper cta">
-					<button className="transaction-button">View transactions</button>
-				</div>
-			</section>
-			<section className="account">
-				<div className="account-content-wrapper">
-					<h3 className="account-title">Argent Bank Savings (x6712)</h3>
-					<p className="account-amount">$10,928.42</p>
-					<p className="account-amount-description">Available Balance</p>
-				</div>
-				<div className="account-content-wrapper cta">
-					<button className="transaction-button">View transactions</button>
-				</div>
-			</section>
-			<section className="account">
-				<div className="account-content-wrapper">
-					<h3 className="account-title">
-						Argent Bank Credit Card (x8349)
-					</h3>
-					<p className="account-amount">$184.30</p>
-					<p className="account-amount-description">Current Balance</p>
-				</div>
-				<div className="account-content-wrapper cta">
-					<button className="transaction-button">View transactions</button>
-				</div>
-			</section>
+			{accountParam.map((element, index) => (
+				<AccountItem
+					accAmount={element.accAmount}
+					accDescription={element.accDescription}
+					accTitle={element.accTitle}
+					key={index}
+				/>
+			))}
 		</main>
 	);
-	return content;
+	return mainContent;
 }

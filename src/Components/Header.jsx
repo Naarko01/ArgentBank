@@ -21,11 +21,13 @@ export default function Header() {
 						Sign In
 					</Link>
 				) : (
-					<a onClick={logoutUser} className="main-nav-item">
-						{user?.userName}
-						<i className="fa fa-user-circle"></i>
-						Logout
-					</a>
+					<div className="nav-user-wrapper">
+						<p>{user?.userName}</p>
+						<a onClick={logoutUser} className="main-nav-item">
+							<i className="fa fa-user-circle"></i>
+							Logout
+						</a>
+					</div>
 				)}
 			</div>
 		</nav>

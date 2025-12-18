@@ -296,3 +296,72 @@ body {
       width: 200px;
    }
 }
+
+/*added css*/
+
+.form-error,
+.form-feedback-error {
+   font-size: larger;
+   color: red;
+}
+
+.form-feedback-validate {
+   font-size: larger;
+   color: green;
+}
+
+.user-update-form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.btn-wrapper {
+   display: grid;
+   gap: 10px;
+}
+
+.user-update-btn {
+   display: block;
+   width: 120px;
+   padding: 8px;
+   font-size: 1rem;
+   font-weight: bold;
+   margin-top: 5px;
+   border-color: #00bc77;
+   background-color: #00bc77;
+   color: #fff;
+   cursor: pointer;
+   grid-row: 1;
+}
+
+.input-wrapper.user-update input[readonly] {
+   background-color: #f3f4f6bd;
+   color: rgba(0, 0, 0, 0.60);
+   border: 1px solid #e5e7eb;
+   box-shadow: none;
+   outline: none;
+   pointer-events: none;
+}
+
+.input-wrapper.user-update input[readonly]:focus {
+   outline: none;
+   box-shadow: none;
+}
+
+.nav-user-wrapper {
+   display: flex;
+   align-items: center;
+   height: 50px;
+}
+
+.nav-user-wrapper p {
+   margin-right: 5px;
+   font-size: larger;
+   font-weight: 500;
+}
+
+.main-nav-item i {
+   margin-right: 0.2rem;
+}

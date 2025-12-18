@@ -7,12 +7,11 @@ import { clearUser } from "../redux/user/userSlice";
 export default function useAuth() {
 	const dispatch = useDispatch();
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-	const authError = useSelector((state) => state.auth.error);
+	const authError = useSelector((state) => state.auth.error?.message);
 	const user = useSelector((state) => state.user.info);
 
 	const loginUser = async (email, password) => {
 		const result = await dispatch(login({ email, password }));
-
 		if (login.fulfilled.match(result)) {
 			await dispatch(fetchUserInfo());
 			return true;

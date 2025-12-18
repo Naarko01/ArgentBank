@@ -1,20 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 export default function Login() {
-	const { loginUser } = useAuth();
+	const { loginUser, authError } = useAuth();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState(null);
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		setError(null);
 		const success = await loginUser(email, password);
 		if (success) {
 			navigate("/user");
+		} else {
+			setError(authError);
 		}
 	};
+
+	useEffect(() => {
+		setError(error);
+	}, [error]);
 
 	return (
 		<main className="main bg-dark">
@@ -44,6 +52,7 @@ export default function Login() {
 						<input type="checkbox" id="remember-me" />
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
+					{error ? <p className="form-error">{error}</p> : null}
 					<button className="sign-in-button">Sign In</button>
 				</form>
 			</section>

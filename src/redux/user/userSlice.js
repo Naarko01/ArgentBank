@@ -24,6 +24,7 @@ const userSlice = createSlice({
          })
          .addCase(updateUserInfo.fulfilled, (state, action) => {
             state.info = action.payload;
+            state.error = null
          })
          .addCase(updateUserInfo.rejected, (state, action) => {
             state.error = action.payload;
