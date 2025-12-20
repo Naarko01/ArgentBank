@@ -11,13 +11,23 @@ export default function Login() {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		setError(null);
+		if (email === "" || password === "") {
+			setError("Vérifiez que tous les champs sont remplis");
+			return;
+		}
 		const success = await loginUser(email, password);
 		if (success) {
 			navigate("/user");
 		} else {
 			setError(authError);
 		}
+	};
+
+	const updateState = (e) => {
+		e.currentTarget.id === "username"
+			? setEmail(e.currentTarget.value)
+			: setPassword(e.currentTarget.value);
+		setError(null);
 	};
 
 	useEffect(() => {
@@ -36,7 +46,7 @@ export default function Login() {
 							type="text"
 							id="username"
 							value={email}
-							onChange={(e) => setEmail(e.target.value)}
+							onChange={updateState}
 						/>
 					</div>
 					<div className="input-wrapper">
@@ -45,7 +55,7 @@ export default function Login() {
 							type="password"
 							id="password"
 							value={password}
-							onChange={(e) => setPassword(e.target.value)}
+							onChange={updateState}
 						/>
 					</div>
 					<div className="input-remember">
