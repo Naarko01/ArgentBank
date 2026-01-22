@@ -13,9 +13,9 @@ export default function App() {
 				<Router>
 					<Header />
 					<Routes>
-						<Route path="/ArgentBank/" element={<Home />} />
-						<Route path="/ArgentBank/login" element={<Login />} />
-						<Route path="/ArgentBank/user" element={<UserPage />} />
+						<Route path="/" element={<Home />} />
+						<Route path="/login" element={<Login />} />
+						<Route path="/user" element={<UserPage />} />
 					</Routes>
 					<Footer />
 				</Router>

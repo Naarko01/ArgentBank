@@ -15,20 +15,19 @@ export default function Header() {
 				<h1 className="sr-only">Argent Bank</h1>
 			</Link>
 			<div>
-				{!isAuthenticated ? (
+				{!isAuthenticated ?
 					<Link to="/login" className="main-nav-item">
 						<i className="fa fa-user-circle"></i>
 						Login
 					</Link>
-				) : (
-					<div className="nav-user-wrapper">
+				:	<div className="nav-user-wrapper">
 						<p>{user?.userName}</p>
 						<a onClick={logoutUser} className="main-nav-item">
 							<i className="fa fa-user-circle"></i>
 							Logout
 						</a>
 					</div>
-				)}
+				}
 			</div>
 		</nav>
 	);
