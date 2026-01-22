@@ -6,7 +6,7 @@ export default function Header() {
 
 	return (
 		<nav className="main-nav">
-			<Link to="/" className="main-nav-logo">
+			<Link to="/ArgentBank/" className="main-nav-logo">
 				<img
 					className="main-nav-logo-image"
 					src="./img/argentBankLogo.png"
@@ -16,7 +16,7 @@ export default function Header() {
 			</Link>
 			<div>
 				{!isAuthenticated ?
-					<Link to="/login" className="main-nav-item">
+					<Link to="/ArgentBank/login" className="main-nav-item">
 						<i className="fa fa-user-circle"></i>
 						Login
 					</Link>

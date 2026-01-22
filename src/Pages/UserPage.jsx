@@ -48,7 +48,7 @@ export default function UserPage() {
 
 	useEffect(() => {
 		if (!isAuthenticated) {
-			return navigate("/");
+			return navigate("/ArgentBank/");
 		}
 	}, [isAuthenticated, navigate]);
 
@@ -71,17 +71,17 @@ export default function UserPage() {
 				<label htmlFor="lastName">Last Name</label>
 				<input type="text" name="lastName" value={lastName} readOnly />
 			</div>
-			{feedback ? (
+			{feedback ?
 				<p
 					className={
-						feedback === "Changement validé !"
-							? "form-feedback-validate"
-							: "form-feedback-error"
+						feedback === "Changement validé !" ?
+							"form-feedback-validate"
+						:	"form-feedback-error"
 					}
 				>
 					{feedback}
 				</p>
-			) : null}
+			:	null}
 			<div className="btn-wrapper">
 				<button onClick={handleSubmit} className="user-update-btn">
 					Save

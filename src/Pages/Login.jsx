@@ -17,16 +17,16 @@ export default function Login() {
 		}
 		const success = await loginUser(email, password);
 		if (success) {
-			navigate("/user");
+			navigate("/ArgentBank/user");
 		} else {
 			setError(authError);
 		}
 	};
 
 	const updateState = (e) => {
-		e.currentTarget.id === "username"
-			? setEmail(e.currentTarget.value)
-			: setPassword(e.currentTarget.value);
+		e.currentTarget.id === "username" ?
+			setEmail(e.currentTarget.value)
+		:	setPassword(e.currentTarget.value);
 		setError(null);
 	};
 
@@ -62,7 +62,9 @@ export default function Login() {
 						<input type="checkbox" id="remember-me" />
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
-					{error ? <p className="form-error">{error}</p> : null}
+					{error ?
+						<p className="form-error">{error}</p>
+					:	null}
 					<button className="sign-in-button">Login</button>
 				</form>
 			</section>
